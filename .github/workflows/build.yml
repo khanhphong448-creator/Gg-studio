@@ -8,12 +8,21 @@ jobs:
       - name: Checkout mã nguồn
         uses: actions/checkout@v4
 
+      - name: Cài đặt Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Cài đặt Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      - name: Tải thư viện
+      - name: Khởi tạo nền tảng Android tự động
+        run: flutter create . --org com.studio.googlestudio --platforms=android
+
+      - name: Cài thư viện
         run: flutter pub get
 
       - name: Đóng gói APK
